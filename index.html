@@ -1,1309 +1,798 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
-  <title>Indice Public — Public Affairs & Lobbying Consultation</title>
-  <meta name="description" content="Indice Public advises leadership teams on public affairs, lobbying, and political risk across Canada." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      /* Cabinet / law-firm tone: restrained, minimal, low-chroma */
-      --bg:#0a0d12;
-      --panel:#0f141c;
-      --panel2:#121a24;
-      --stroke:rgba(255,255,255,.11);
-
-      --ink:#f2f4f8;
-      --muted:rgba(242,244,248,.72);
-      --muted2:rgba(242,244,248,.55);
-
-      --accent:#b7c7ff;     /* steel-blue */
-      --accent2:#6f89ff;
-
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-
-      --r:14px;
-      --r2:18px;
-      --max: 1120px;
-    }
-
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#ffffff;
-        --panel:#f6f7fb;
-        --panel2:#eef1f7;
-        --stroke:rgba(11,15,23,.12);
-
-        --ink:#0b0f17;
-        --muted:rgba(11,15,23,.70);
-        --muted2:rgba(11,15,23,.55);
-
-        --accent:#1f3cff;
-        --accent2:#1532ff;
-
-        --shadow: 0 12px 30px rgba(11,15,23,.10);
-      }
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
-      background: var(--bg);
-      line-height:1.55;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      overflow-x:hidden;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-
-    .wrap{
-      width:min(var(--max), calc(100% - 48px));
-      margin:0 auto;
-    }
-
-    /* Header (cabinet: quiet, precise) */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: color-mix(in srgb, var(--bg) 92%, transparent);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--stroke);
-    }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      padding:14px 0;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:700;
-      letter-spacing:.2px;
-    }
-    .mark{
-      width:34px; height:34px;
-      border-radius: 12px;
-      display:grid;
-      place-items:center;
-      background: transparent;
-      border:1px solid var(--stroke);
-    }
-    .mark svg{ width:20px; height:20px; opacity:.95; }
-
-    .navlinks{
-      display:flex;
-      gap:18px;
-      align-items:center;
-      font-weight:600;
-      color:var(--muted);
-      letter-spacing:.01em;
-    }
-    .navlinks a{
-      padding:10px 10px;
-      border-radius: 12px;
-      border:1px solid transparent;
-      transition: background .15s ease, border-color .15s ease, color .15s ease;
-    }
-    .navlinks a:hover{
-      background: color-mix(in srgb, var(--panel) 60%, transparent);
-      border-color: var(--stroke);
-      color: var(--ink);
-    }
-
-    .right{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .toggle{
-      display:flex;
-      padding:4px;
-      border-radius: 999px;
-      border:1px solid var(--stroke);
-      background: color-mix(in srgb, var(--panel) 55%, transparent);
-    }
-    .toggle button{
-      appearance:none;
-      border:0;
-      background: transparent;
-      color: var(--muted);
-      font-weight:700;
-      padding:8px 12px;
-      border-radius: 999px;
-      cursor:pointer;
-      transition: background .15s ease, color .15s ease;
-      letter-spacing:.04em;
-    }
-    .toggle button[aria-pressed="true"]{
-      background: color-mix(in srgb, var(--panel2) 80%, transparent);
-      color: var(--ink);
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:11px 14px;
-      border-radius: 12px;
-      border:1px solid var(--stroke);
-      background: transparent;
-      color: var(--ink);
-      font-weight:700;
-      letter-spacing:.01em;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      white-space:nowrap;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: color-mix(in srgb, var(--panel) 55%, transparent);
-      border-color: color-mix(in srgb, var(--accent2) 30%, var(--stroke));
-    }
-    .btn.primary{
-      background: color-mix(in srgb, var(--accent2) 14%, transparent);
-      border-color: color-mix(in srgb, var(--accent2) 55%, var(--stroke));
-    }
-
-    .btn:focus-visible, .navlinks a:focus-visible, .toggle button:focus-visible, input:focus-visible, textarea:focus-visible{
-      outline: 3px solid color-mix(in srgb, var(--accent2) 45%, transparent);
-      outline-offset: 2px;
-    }
-
-    section{ padding: 84px 0; }
-    .stack{ display:grid; gap:16px; }
-    .grid2{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 26px; align-items:start; }
-
-    @media (max-width: 980px){
-      .navlinks{ display:none; }
-      .grid2{ grid-template-columns: 1fr; }
-      .right .btn{ display:none; }
-      .right .btn.primary{ display:inline-flex; }
-    }
-    @media (max-width: 520px){
-      section{ padding: 64px 0; }
-    }
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDICE PUBLIC — Public Affairs, Lobbying & Strategic Advisory</title>
+    <meta name="description" content="Consultation discrète en affaires publiques, lobbying, gestion de crise et relations publiques pour entreprises et family offices au Canada et au Royaume-Uni.">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    @media (max-width: 520px){
-      /* Keep language toggle visible on mobile */
-      .toggle{ display:flex; }
-      .toggle button{ padding: 7px 10px; font-size: 12px; }
-      .nav{ gap: 12px; }
-      .brand span:last-child{ font-size: 14px; }
-    }
+    <style>
+        :root {
+            --bg-main: #080c14;
+            --bg-card: #0f1623;
+            --bg-card-hover: #141e30;
+            --border: #1e2a3c;
+            --border-light: #2a3a52;
+            --accent-gold: #c5a059;
+            --accent-gold-bright: #e5be75;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
 
-/* Hero */
-    
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-.hero{
-  padding: 104px 0 64px;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(8, 12, 20, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1.2rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  /* BLUE NIGHT – institutional */
-  background:
-    radial-gradient(120% 80% at 15% 0%, rgba(60,90,170,0.55) 0%, rgba(15,28,64,0.85) 45%, rgba(8,16,40,0.95) 75%),
-    linear-gradient(180deg, #0a1538 0%, #0a1538 100%);
-  color: #ffffff;
-}
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
 
-/* ensure text above effects */
-.hero > .wrap{
-  position: relative;
-  z-index: 2;
-}
+        .logo span {
+            color: var(--accent-gold);
+        }
 
-/* subtle institutional texture */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      rgba(255,255,255,0.06) 0px,
-      rgba(255,255,255,0.06) 1px,
-      rgba(255,255,255,0.00) 1px,
-      rgba(255,255,255,0.00) 18px
-    );
-  opacity:0.35;
-}
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
 
-/* top depth fade */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.00) 45%);
-}
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.25s ease;
+        }
 
-/* HERO readability overrides (force contrast) */
-.hero .kicker{ color: rgba(255,255,255,0.78) !important; }
-.hero h1{ color: #ffffff !important; }
-.hero .lead{ color: rgba(255,255,255,0.88) !important; }
-.hero .card, .hero .panel{ color: var(--ink); } /* keep right panel readable */
+        nav a:hover {
+            color: var(--accent-gold);
+        }
 
-/* Buttons inside hero */
-.hero .btn{
-  color:#ffffff !important;
-  border-color: rgba(255,255,255,0.22) !important;
-  background: rgba(255,255,255,0.06) !important;
-}
-.hero .btn:hover{
-  background: rgba(255,255,255,0.10) !important;
-  border-color: rgba(255,255,255,0.30) !important;
-}
-.hero .btn.primary{
-  background: rgba(111,137,255,0.22) !important;
-  border-color: rgba(183,199,255,0.40) !important;
-}
-.hero .btn.primary:hover{
-  background: rgba(111,137,255,0.28) !important;
-  border-color: rgba(183,199,255,0.55) !important;
-}
+        /* Language Switcher */
+        .lang-switcher {
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 2px;
+        }
 
-/* Ensure any muted text in hero stays visible */
-.hero *{ text-shadow: 0 1px 0 rgba(0,0,0,0.10); }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 4px 10px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+        }
 
+        .lang-btn.active {
+            background: var(--accent-gold);
+            color: #000;
+            font-weight: 700;
+        }
 
-/* put content above hero effects */
-.hero > .wrap{ position: relative; z-index: 2; }
+        /* Hero Section (Inspirée d'IndicePublic.com) */
+        .hero {
+            position: relative;
+            min-height: 92vh;
+            padding: 160px 6% 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: 
+                radial-gradient(circle at 85% 15%, rgba(197, 160, 89, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 15% 85%, rgba(30, 42, 60, 0.4) 0%, transparent 45%);
+            border-bottom: 1px solid var(--border);
+        }
 
-/* subtle diagonal texture — visible but not heavy */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:-10%;
-  z-index: 0;
-  pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      rgba(255,255,255,0.08) 0px,
-      rgba(255,255,255,0.08) 1px,
-      rgba(255,255,255,0.00) 1px,
-      rgba(255,255,255,0.00) 18px
-    );
-  opacity: 0.22;
-  transform: rotate(-2deg);
-  mask-image: linear-gradient(180deg, black 15%, transparent 80%);
-}
+        .hero-top-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-gold);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
 
-/* controlled glow — lighter, smoother */
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:-20%;
-  z-index: 1;
-  pointer-events:none;
-  background:
-    radial-gradient(
-      58% 48% at 22% 24%,
-      rgba(111,137,255,0.22) 0%,
-      rgba(111,137,255,0.12) 28%,
-      rgba(111,137,255,0.00) 62%
-    ),
-    radial-gradient(
-      44% 38% at 78% 20%,
-      rgba(183,199,255,0.18) 0%,
-      rgba(183,199,255,0.10) 30%,
-      rgba(183,199,255,0.00) 66%
-    );
-  opacity: 0.45;
-  filter: blur(0.2px);
-  mask-image: linear-gradient(180deg, black 20%, transparent 78%);
-}
-.kicker{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--muted2);
-    }
-    .kicker:before{
-      content:"";
-      width:10px; height:10px;
-      border-radius: 999px;
-      background: var(--accent2);
-      opacity:.85;
-    }
+        .dot-indicator {
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-gold);
+        }
 
-    h1{
-      margin:14px 0 12px;
-      font-size: clamp(34px, 4.0vw, 56px);
-      line-height: 1.07;
-      letter-spacing: -0.045em;
-    }
-    .lead{
-      margin: 0;
-      font-size: 18px;
-      color: var(--muted);
-      max-width: 64ch;
-    }
-    .hero-ctas{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 18px;
-    }
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: clamp(2.4rem, 4.8vw, 4.2rem);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            max-width: 950px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
 
-    .card{
-      border-radius: var(--r2);
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow);
-    }
-    .panel{ padding: 18px; }
-    .panel h3{ margin:0 0 10px; font-size: 15px; letter-spacing:-.01em; }
-    .panel p{ margin: 0 0 12px; color: var(--muted); }
+        .hero p.lead {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 780px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.75;
+        }
 
-    .mini{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 14px;
-    }
-    .stat{
-      padding: 14px;
-      border-radius: var(--r);
-      background: color-mix(in srgb, var(--panel2) 85%, transparent);
-      border:1px solid color-mix(in srgb, var(--stroke) 70%, transparent);
-    }
-    .stat .big{
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing:-.02em;
-    }
-    .stat .small{
-      margin-top:4px;
-      font-size: 12px;
-      color: var(--muted2);
-      letter-spacing:.10em;
-      text-transform: uppercase;
-      font-weight: 800;
-    }
-    @media (max-width: 680px){
-      .mini{ grid-template-columns: 1fr; }
-    }
+        .hero-actions {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
 
-    .sectionhead{
-      display:flex;
-      justify-content:space-between;
-      align-items:end;
-      gap:18px;
-      margin-bottom: 18px;
-    }
-    h2{
-      margin:0;
-      font-size: clamp(22px, 2.2vw, 30px);
-      letter-spacing:-.03em;
-    }
-    .sub{
-      margin:0;
-      color: var(--muted);
-      max-width: 72ch;
-    }
+        .btn-primary {
+            background: var(--accent-gold);
+            color: #080c14;
+            padding: 0.95rem 2.2rem;
+            border: 1px solid var(--accent-gold);
+            border-radius: 2px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
 
-    /* Services */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .svc{
-      padding: 18px;
-      border-radius: var(--r2);
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow);
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-    }
-    .svc:hover{
-      transform: translateY(-2px);
-      border-color: color-mix(in srgb, var(--accent2) 30%, var(--stroke));
-      background: color-mix(in srgb, var(--panel2) 70%, transparent);
-    }
-    .svc h3{
-      margin: 0 0 8px;
-      font-size: 15px;
-      letter-spacing:-.01em;
-    }
-    .svc p{ margin: 0 0 14px; color: var(--muted); }
+        .btn-primary:hover {
+            background: var(--accent-gold-bright);
+            border-color: var(--accent-gold-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(197, 160, 89, 0.25);
+        }
 
-    .svc .ico{
-      width: 36px;
-      height: 36px;
-      display:grid;
-      place-items:center;
-      border-radius: 12px;
-      border: 1px solid color-mix(in srgb, var(--stroke) 85%, transparent);
-      background: color-mix(in srgb, var(--panel2) 78%, transparent);
-      margin-bottom: 12px;
-    }
-    .svc .ico svg{
-      width: 20px;
-      height: 20px;
-      opacity: .92;
-    }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            padding: 0.95rem 2rem;
+            border: 1px solid var(--border-light);
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.25s ease;
+        }
 
-    .pillrow{ display:flex; flex-wrap:wrap; gap:8px; }
-    
-    .deliver{
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-      display:grid;
-      gap:8px;
-    }
-    .deliver li{
-      margin:0;
-    }
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
 
-    .pill{
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing:.10em;
-      text-transform: uppercase;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border:1px solid color-mix(in srgb, var(--stroke) 80%, transparent);
-      background: color-mix(in srgb, var(--panel2) 85%, transparent);
-      color: var(--muted2);
-    }
-    @media (max-width: 980px){
-      .cards{ grid-template-columns: 1fr; }
-    }
+        /* Hero Scope Table / Key Metrics */
+        .hero-scope-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border);
+            max-width: 1100px;
+        }
 
-    /* Method */
-    .steps{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .step{
-      padding: 18px;
-      border-radius: var(--r2);
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow);
-    }
-    .step .n{
-      width: 30px; height: 30px;
-      border-radius: 12px;
-      display:grid;
-      place-items:center;
-      font-weight: 900;
-      background: transparent;
-      border:1px solid color-mix(in srgb, var(--stroke) 80%, transparent);
-      color: color-mix(in srgb, var(--ink) 92%, var(--muted));
-      margin-bottom: 10px;
-    }
-    .step h3{ margin:0 0 8px; font-size:15px; }
-    .step p{ margin:0; color:var(--muted); }
-    @media (max-width: 980px){
-      .steps{ grid-template-columns: 1fr; }
-    }
+        .scope-item span.label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
 
-    /* Briefings */
-    .insights{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .note{
-      padding: 18px;
-      border-radius: var(--r2);
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
-      border:1px solid var(--stroke);
-      box-shadow: var(--shadow);
-    }
-    .note .tag{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing:.12em;
-      text-transform: uppercase;
-      color: var(--muted2);
-      margin-bottom: 10px;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: var(--accent2);
-      opacity:.85;
-    }
-    .note h3{ margin:0 0 8px; font-size:15px; }
-    .note p{ margin:0 0 14px; color: var(--muted); }
-    .note a.inline{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      color: color-mix(in srgb, var(--accent) 75%, var(--ink));
-      font-weight: 800;
-    }
-    @media (max-width: 980px){
-      .insights{ grid-template-columns: 1fr; }
-    }
+        .scope-item span.value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
 
-    
-/* HubSpot form integration */
-.hs-form-frame{ max-width: 520px; }
-.hs-form-frame iframe{ width:100% !important; border-radius:14px; background:transparent; }
-/* Contact layout tuning */
-.contact .card:first-child{ max-width: 560px; }
-@media (max-width: 980px){ .contact .card:first-child{ max-width: none; } }
+        .scope-item span.value-highlight {
+            color: var(--accent-gold);
+        }
 
+        /* Section Global */
+        .section {
+            padding: 100px 6%;
+            border-bottom: 1px solid var(--border);
+        }
 
-    /* Contact */
-    .contact{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      align-items:start;
-    }
-    .contact .card{ padding: 18px; }
+        .section-header {
+            max-width: 800px;
+            margin-bottom: 3.5rem;
+        }
 
-    label{
-      display:block;
-      font-weight: 800;
-      font-size: 12px;
-      margin: 12px 0 6px;
-      color: var(--muted2);
-      letter-spacing:.12em;
-      text-transform: uppercase;
-    }
-    input, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border:1px solid var(--stroke);
-      background: color-mix(in srgb, var(--panel2) 85%, transparent);
-      color: var(--ink);
-      font: inherit;
-    }
-    textarea{ min-height: 128px; resize: vertical; }
-    .fine{
-      margin-top: 10px;
-      color: var(--muted2);
-      font-size: 13px;
-    }
-    .contact-actions{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top: 14px;
-    }
-    .kpi{
-      display:grid;
-      gap: 10px;
-      margin-top: 10px;
-      color: var(--muted);
-    }
-    .kpi strong{ color: var(--ink); }
+        .section-tag {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
 
-    @media (max-width: 980px){
-      .contact{ grid-template-columns: 1fr; }
-    }
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
 
-    footer{
-      padding: 34px 0 44px;
-      border-top: 1px solid var(--stroke);
-      color: var(--muted2);
-      font-size: 13px;
-      letter-spacing:.01em;
-    }
-    .footergrid{
-      display:flex;
-      justify-content:space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
 
-    /* i18n */
-    [data-i18n]{ display:none; }
-    [data-i18n].active{ display:block; }
-  </style>
+        /* Services Grid */
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.8rem 2.2rem;
+            border-radius: 2px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-gold);
+            background-color: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+
+        .card-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-card h3 {
+            font-family: var(--font-title);
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .service-card > p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .deliverables-list {
+            list-style: none;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .deliverables-list li {
+            position: relative;
+            padding-left: 1.2rem;
+            color: #cbd5e1;
+            font-size: 0.88rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .deliverables-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-family: var(--font-mono);
+        }
+
+        /* Method Section (Indice Public Style) */
+        .method-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .step-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .step-num {
+            font-family: var(--font-title);
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            opacity: 0.4;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .step-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Confidentiality Banner */
+        .confidential-box {
+            background: linear-gradient(135deg, #0f1623 0%, #162135 100%);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--accent-gold);
+            padding: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .confidential-box h3 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .confidential-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 850px;
+            line-height: 1.7;
+        }
+
+        /* Contact Section Form */
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem 2.5rem;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #080c14;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 0.9rem 1rem;
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            transition: border-color 0.25s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            padding: 3rem 6%;
+            background: #05080e;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        footer p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 4%; }
+            .header-right nav { display: none; }
+            .hero { padding-top: 130px; }
+            .hero h1 { font-size: 2.1rem; }
+            .grid-2x2 { grid-template-columns: 1fr; }
+            .contact-wrapper { padding: 2rem 1.5rem; }
+            footer { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
-
 <body>
-  <header>
-    <div class="wrap">
-      <div class="nav">
-        <a class="brand" href="#">
-          <span class="mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M7 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="M7 6h6a4 4 0 0 1 0 8H7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 14v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <span>Indice Public</span>
-        </a>
 
-        <nav class="navlinks" aria-label="Primary">
-          <a href="#services" data-t="nav_services">Services</a>
-          <a href="#approach" data-t="nav_approach">Method</a>
-          <a href="#insights" data-t="nav_insights">Briefings</a>
-          <a href="#contact" data-t="nav_contact">Contact</a>
-        </nav>
-
-        <div class="right">
-          <div class="toggle" role="group" aria-label="Language">
-            <button id="btn-en" type="button" aria-pressed="true">EN</button>
-            <button id="btn-fr" type="button" aria-pressed="false">FR</button>
-          </div>
-          <a class="btn" href="#contact" data-t="cta_brief">Request a briefing</a>
-          <a class="btn primary" href="#contact" data-t="cta_engage">Engage</a>
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="logo">INDICE <span>PUBLIC</span></a>
+        <div class="header-right">
+            <nav>
+                <a href="#expertises" data-i18n="nav_services">Services</a>
+                <a href="#method" data-i18n="nav_method">Méthode</a>
+                <a href="#confidentiality" data-i18n="nav_confidentiality">Confidentialité</a>
+                <a href="#contact" data-i18n="nav_contact">Contact</a>
+            </nav>
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLanguage('fr')">FR</button>
+                <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="setLanguage('es')">ES</button>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="top">
-      <div class="wrap">
-        <div class="grid2">
-          <div class="stack">
-            <!-- EN -->
-            <div class="active" data-i18n="en">
-              <div class="kicker">Public Affairs & Lobbying Consultation</div>
-              <h1>Political risk. Government outcomes.</h1>
-              <p class="lead">
-                Discreet public affairs and lobbying consultation for leadership teams navigating government, regulation, and reputational exposure across Canada, the United Kingdom, and Commonwealth-aligned jurisdictions.
-                Clear analysis. Direct recommendations. Controlled execution.
-              </p>
-            </div>
-
-            <!-- FR (audited: strict) -->
-            <div data-i18n="fr">
-              <div class="kicker">Consultation en affaires publiques et lobbying</div>
-              <h1>Risque politique. Décisions gouvernementales.</h1>
-              <p class="lead">
-                Consultation discrète en affaires publiques et lobbying, destinée aux équipes de direction et aux conseils d’administration confrontés à des enjeux gouvernementaux,
-                réglementaires et réputationnels au Canada et dans des juridictions alignées du Commonwealth. Analyse rigoureuse. Recommandations directes. Exécution maîtrisée.
-              </p>
-            </div>
-
-            <div class="hero-ctas">
-              <a class="btn primary" href="#contact" data-t="cta_conf">Request a confidential briefing</a>
-              <a class="btn" href="#services" data-t="cta_view">View services</a>
-              <a class="btn" href="#insights" data-t="cta_read">Access briefings</a>
-            </div>
-          </div>
-
-          <aside class="card panel" aria-label="Scope panel">
-            <!-- EN -->
-            <div class="active" data-i18n="en">
-              <h3>Scope</h3>
-              <p>Mandates where government and public risk shape the outcome.</p>
-              <div class="mini" aria-label="Coverage stats">
-                <div class="stat">
-                  <div class="big">Federal + QC + ON</div>
-                  <div class="small">Coverage</div>
-                </div>
-                <div class="stat">
-                  <div class="big">24–48h</div>
-                  <div class="small">First response</div>
-                </div>
-                <div class="stat">
-                  <div class="big">Retainer / Project</div>
-                  <div class="small">Engagement</div>
-                </div>
-              </div>
-              <ul style="margin-top:14px; color:var(--muted); padding-left:18px; margin-bottom:0">
-                <li>Government relations & lobbying</li>
-                <li>Political and regulatory risk</li>
-                <li>Stakeholder and power mapping</li>
-                <li>Issues management under scrutiny</li>
-              </ul>
-            </div>
-
-            <!-- FR -->
-            <div data-i18n="fr">
-              <h3>Portée</h3>
-              <p>Mandats où le risque public et gouvernemental détermine l’issue.</p>
-              <div class="mini" aria-label="Statistiques couverture">
-                <div class="stat">
-                  <div class="big">Fédéral + QC + ON</div>
-                  <div class="small">Couverture</div>
-                </div>
-                <div class="stat">
-                  <div class="big">24–48 h</div>
-                  <div class="small">Première réponse</div>
-                </div>
-                <div class="stat">
-                  <div class="big">Forfait / Mandat</div>
-                  <div class="small">Mode</div>
-                </div>
-              </div>
-              <ul style="margin-top:14px; color:var(--muted); padding-left:18px; margin-bottom:0">
-                <li>Relations gouvernementales et lobbying</li>
-                <li>Risque politique et réglementaire</li>
-                <li>Cartographie des parties prenantes et du pouvoir</li>
-                <li>Gestion d’enjeux sous surveillance</li>
-              </ul>
-            </div>
-          </aside>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-top-tag">
+            <span class="dot-indicator"></span>
+            <span data-i18n="hero_tag">Consultation en Affaires Publiques & Strategie d'Influence</span>
         </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services">
-      <div class="wrap">
-        <div class="sectionhead">
-          <div class="stack">
-            <h2 data-t="h_services">Services</h2>
-            <p class="sub" data-t="services_sub">
-              Clear deliverables, tight timelines, and disciplined execution — built for decision-makers and internal teams.</p>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="svc">
-            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" role="img" aria-label="Government relations icon">
-  <path d="M4 10h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M6 10v8m4-8v8m4-8v8m4-8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M3.5 10L12 5l8.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M12 14h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M17.5 12.5l1.5 1.5-1.5 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></div>
-            <div class="active" data-i18n="en">
-              <h3>Lobbying & Government Relations</h3>
-              
-              <p>Government engagement structured around decisions, calendars, and counterparts.</p>
-              <ul class="deliver">
-                <li>Stakeholder map (who/why/when)</li><li>Meeting plan & sequencing (30–90 days)</li><li>Briefing notes & approved talking points</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Stakeholder map</span><span class="pill">Meeting plan</span><span class="pill">Talking points</span>
-              </div>
-</div>
-            <div data-i18n="fr">
-              <h3>Lobbying et relations gouvernementales</h3>
-              
-              <p>Démarches gouvernementales structurées autour des décisions, des calendriers et des contreparties.</p>
-              <ul class="deliver">
-                <li>Cartographie des parties prenantes (qui/pourquoi/quand)</li><li>Plan de rencontres et séquençage (30–90 jours)</li><li>Notes de briefing et arguments approuvés</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Cartographie</span><span class="pill">Plan de rencontres</span><span class="pill">Arguments</span>
-              </div>
-</div>
-          </article>
-
-          <article class="svc">
-            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" role="img" aria-label="Public affairs strategy icon">
-  <path d="M8 3h7l3 3v15a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M15 3v4a1 1 0 0 0 1 1h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M9 11h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M9 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M17.8 12.8a2.4 2.4 0 1 1-3.4 3.4a2.4 2.4 0 0 1 3.4-3.4z" stroke="currentColor" stroke-width="2"/>
-  <path d="M18.8 16.2l1.2 1.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg></div>
-            <div class="active" data-i18n="en">
-              <h3>Public Affairs Strategy</h3>
-              
-              <p>A defensible strategy that aligns policy, reputation, and operations.</p>
-              <ul class="deliver">
-                <li>Decision memo (options, risks, recommendation)</li><li>Narrative & message architecture</li><li>Timeline with responsibilities and next steps</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Decision memo</span><span class="pill">Narrative</span><span class="pill">Timeline</span>
-              </div>
-</div>
-            <div data-i18n="fr">
-              <h3>Stratégie d’affaires publiques</h3>
-              
-              <p>Une stratégie défendable qui aligne politiques publiques, réputation et opérations.</p>
-              <ul class="deliver">
-                <li>Mémo décisionnel (options, risques, recommandation)</li><li>Architecture narrative et messages</li><li>Échéancier avec responsabilités et prochaines étapes</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Mémo décision</span><span class="pill">Narratif</span><span class="pill">Échéancier</span>
-              </div>
-</div>
-          </article>
-
-          <article class="svc">
-            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" role="img" aria-label="Political and regulatory risk icon">
-  <path d="M12 3l9 4v6c0 5-3.7 8.7-9 9c-5.3-.3-9-4-9-9V7l9-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M8.5 12.5l2.3 2.3L15.8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M12 7.8v2.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg></div>
-            <div class="active" data-i18n="en">
-              <h3>Political & Regulatory Risk</h3>
-              
-              <p>Anticipate regulatory shifts and political exposure before they become operational problems.</p>
-              <ul class="deliver">
-                <li>Risk register (ranked, with owners)</li><li>Scenario analysis (best/base/worst)</li><li>Mitigation plan with triggers and actions</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Risk register</span><span class="pill">Scenarios</span><span class="pill">Mitigation</span>
-              </div>
-</div>
-            <div data-i18n="fr">
-              <h3>Risque politique et réglementaire</h3>
-              
-              <p>Anticiper les virages réglementaires et l’exposition politique avant que ça devienne un problème opérationnel.</p>
-              <ul class="deliver">
-                <li>Registre de risques (priorisé, avec responsables)</li><li>Analyse de scénarios (meilleur/base/pire)</li><li>Plan de mitigation avec déclencheurs et actions</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Registre</span><span class="pill">Scénarios</span><span class="pill">Mitigation</span>
-              </div>
-</div>
-          </article>
-
-          <article class="svc">
-            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" role="img" aria-label="Stakeholder and power mapping icon">
-  <circle cx="6" cy="8" r="2" stroke="currentColor" stroke-width="2"/>
-  <circle cx="18" cy="7" r="2" stroke="currentColor" stroke-width="2"/>
-  <circle cx="16.5" cy="17" r="2" stroke="currentColor" stroke-width="2"/>
-  <circle cx="8" cy="18" r="2" stroke="currentColor" stroke-width="2"/>
-  <path d="M7.7 9.2l8.6-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M17.3 8.8l-1 6.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M15.2 16l-5.4 1.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M7.3 16.6l-1-6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg></div>
-            <div class="active" data-i18n="en">
-              <h3>Stakeholder & Power Mapping</h3>
-              
-              <p>Identify influence, gatekeepers, and decision paths — then design leverage.</p>
-              <ul class="deliver">
-                <li>Influence map (actors, ties, pressure points)</li><li>Opposition/coalition mapping</li><li>Engagement sequence + objectives per meeting</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Influence map</span><span class="pill">Coalitions</span><span class="pill">Engagement plan</span>
-              </div>
-</div>
-            <div data-i18n="fr">
-              <h3>Cartographie des parties prenantes et du pouvoir</h3>
-              
-              <p>Identifier l’influence, les gardiens de porte et les chemins décisionnels — puis construire le levier.</p>
-              <ul class="deliver">
-                <li>Carte d’influence (acteurs, liens, points de pression)</li><li>Cartographie oppositions/coalitions</li><li>Séquence d’engagement + objectifs par rencontre</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Influence</span><span class="pill">Coalitions</span><span class="pill">Plan d’engagement</span>
-              </div>
-</div>
-          </article>
-
-          <article class="svc">
-            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" role="img" aria-label="Issues management icon">
-  <path d="M12 2l7 4v6c0 6-4 9-7 10c-3-1-7-4-7-10V6l7-4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M9 15h4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg></div>
-            <div class="active" data-i18n="en">
-              <h3>Issues Management</h3>
-              
-              <p>When scrutiny rises, you need a response architecture, not improvisation.</p>
-              <ul class="deliver">
-                <li>72-hour response playbook (roles, approvals, cadence)</li><li>Q&A + stakeholder comms package</li><li>Executive brief: what to say / not say / do next</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">72h playbook</span><span class="pill">Q&A</span><span class="pill">Exec brief</span>
-              </div>
-</div>
-            <div data-i18n="fr">
-              <h3>Gestion d’enjeux</h3>
-              
-              <p>Quand la surveillance monte, il faut une architecture de réponse, pas de l’impro.</p>
-              <ul class="deliver">
-                <li>Playbook 72 h (rôles, approbations, cadence)</li><li>Q&R + kit de communications parties prenantes</li><li>Brief direction: quoi dire / éviter / faire ensuite</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">Playbook 72 h</span><span class="pill">Q&R</span><span class="pill">Brief direction</span>
-              </div>
-</div>
-          </article>
-
-          <article class="svc">
-            <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" role="img" aria-label="Board and executive briefings icon">
-  <path d="M7 3h7l3 3v15a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M14 3v4a1 1 0 0 0 1 1h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M8.5 11h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M8.5 15h5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  <path d="M15.5 14.5l1.8 1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg></div>
-            <div class="active" data-i18n="en">
-              <h3>Board / Executive Briefings</h3>
-              
-              <p>Concise briefings for fast decisions and defensible records.</p>
-              <ul class="deliver">
-                <li>2-page briefing (context, risks, recommendation)</li><li>Talking points tailored to counterparties</li><li>Next-steps plan (who/when/what)</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">2‑pager</span><span class="pill">Talking points</span><span class="pill">Next steps</span>
-              </div>
-</div>
-            <div data-i18n="fr">
-              <h3>Briefings CA / direction</h3>
-              
-              <p>Briefings concis pour décider vite et garder un dossier défendable.</p>
-              <ul class="deliver">
-                <li>Briefing 2 pages (contexte, risques, recommandation)</li><li>Arguments adaptés aux contreparties</li><li>Plan des prochaines étapes (qui/quand/quoi)</li>
-              </ul>
-              <div class="pillrow" style="margin-top:14px">
-                <span class="pill">2 pages</span><span class="pill">Arguments</span><span class="pill">Prochaines étapes</span>
-              </div>
-</div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-<!-- INTERNATIONAL -->
-<section id="international">
-  <div class="wrap">
-    <div class="sectionhead">
-      <div class="stack">
-        <h2>International</h2>
-        <p class="sub">
-          Commonwealth-aligned advisory across compatible legal and governance systems.
+        
+        <h1 data-i18n="hero_title">Risque politique. Décisions gouvernementales. Réputation sous contrôle.</h1>
+        
+        <p class="lead" data-i18n="hero_lead">
+            Consultation discrète destinée aux équipes de direction, Family Offices et investisseurs confrontés à des enjeux gouvernementaux, réglementaires et réputationnels au Canada, au Royaume-Uni et dans les juridictions alignées.
         </p>
-      </div>
-    </div>
 
-    <div class="cards">
-      <article class="svc">
-        <h3>Primary jurisdictions</h3>
-        <p>Canada<br>United Kingdom</p>
-      </article>
-
-      <article class="svc">
-        <h3>Selected aligned jurisdictions</h3>
-        <p>Australia<br>New Zealand<br>Singapore</p>
-      </article>
-
-      <article class="svc">
-        <h3>Cross-border advisory</h3>
-        <p>Structured positioning across jurisdictions sharing common legal frameworks.</p>
-      </article>
-    </div>
-
-    <p class="sub" style="margin-top:30px;">
-      Additional jurisdictions engaged on a mandate-specific basis.
-    </p>
-  </div>
-</section>
-
-    <!-- METHOD -->
-    <section id="approach">
-      <div class="wrap">
-        <div class="sectionhead">
-          <div class="stack">
-            <h2 data-t="h_approach">Method</h2>
-            <p class="sub" data-t="approach_sub">
-              A tight process: define the decision, build leverage, execute with discipline.
-            </p>
-          </div>
+        <div class="hero-actions">
+            <a href="#contact" class="btn-primary" data-i18n="hero_btn_1">Demander un briefing confidentiel</a>
+            <a href="#expertises" class="btn-secondary" data-i18n="hero_btn_2">Explorer nos expertises</a>
         </div>
 
-        <div class="steps">
-          <div class="step">
-            <div class="active" data-i18n="en">
-              <div class="n">1</div>
-              <h3>Assessment</h3>
-              <p>Define the decision, constraints, and stakeholders that can change the outcome.</p>
+        <!-- Scope / Metrics Grid -->
+        <div class="hero-scope-grid">
+            <div class="scope-item">
+                <span class="label" data-i18n="m_scope_lbl">Portée</span>
+                <span class="value" data-i18n="m_scope_val">Enjeux publics &amp; gouvernementaux</span>
             </div>
-            <div data-i18n="fr">
-              <div class="n">1</div>
-              <h3>Analyse</h3>
-              <p>Clarifier la décision, les contraintes et les acteurs capables d’infléchir l’issue.</p>
+            <div class="scope-item">
+                <span class="label" data-i18n="m_cov_lbl">Bureaux &amp; Couverture</span>
+                <span class="value-highlight" data-i18n="m_cov_val">Canada (QC, ON, Fédéral) &amp; Royaume-Uni</span>
             </div>
-          </div>
-
-          <div class="step">
-            <div class="active" data-i18n="en">
-              <div class="n">2</div>
-              <h3>Strategy</h3>
-              <p>Sequence meetings, messages, and cross-border positioning across aligned jurisdictions.</p>
+            <div class="scope-item">
+                <span class="label" data-i18n="m_resp_lbl">Première réponse</span>
+                <span class="value" data-i18n="m_resp_val">24–48 h (Cellule d'urgence)</span>
             </div>
-            <div data-i18n="fr">
-              <div class="n">2</div>
-              <h3>Stratégie</h3>
-              <p>Séquencer les rencontres et les messages; fixer des engagements mesurables et un échéancier.</p>
+            <div class="scope-item">
+                <span class="label" data-i18n="m_mode_lbl">Modes d'engagement</span>
+                <span class="value" data-i18n="m_mode_val">Mandat spécifique / Accompagnement récurrent</span>
             </div>
-          </div>
-
-          <div class="step">
-            <div class="active" data-i18n="en">
-              <div class="n">3</div>
-              <h3>Execution</h3>
-              <p>Track signals, adjust, and deliver decision-ready briefings.</p>
-            </div>
-            <div data-i18n="fr">
-              <div class="n">3</div>
-              <h3>Exécution</h3>
-              <p>Suivre les signaux, ajuster, et livrer des briefings prêts pour la décision.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- BRIEFINGS -->
-    <section id="insights">
-      <div class="wrap">
-        <div class="sectionhead">
-          <div class="stack">
-            <h2 data-t="h_insights">Briefings</h2>
-            <p class="sub" data-t="insights_sub">
-              Examples only. Client work is confidential.
-            </p>
-          </div>
+    <!-- Services Detailed Section -->
+    <section class="section" id="expertises">
+        <div class="section-header">
+            <span class="section-tag" data-i18n="s_tag">Périmètre d'intervention</span>
+            <h2 class="section-title" data-i18n="s_title">Des livrables clairs, des échéanciers resserrés et une exécution disciplinée.</h2>
+            <p class="section-subtitle" data-i18n="s_sub">Nous aidons les décideurs à anticiper les virages réglementaires, gérer les attaques réputationnelles et construire des leviers d'action solides.</p>
         </div>
 
-        <div class="insights">
-          <article class="note">
-            <div class="active" data-i18n="en">
-              <div class="tag"><span class="dot"></span> Briefing</div>
-              <h3>Quarterly political risk signals</h3>
-              <p>Early indicators and what they imply for active files.</p>
-              <a class="inline" href="#contact">Request the latest →</a>
+        <div class="grid-2x2">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <div class="card-num">01 / RELATIONS PUBLIQUES & RÉPUTATION</div>
+                <h3 data-i18n="s1_h">Positionnement Exécutif & Shield-Réputation</h3>
+                <p data-i18n="s1_p">Maîtrise de l'image de marque et valorisation du leadership exécutif auprès des cercles décisionnels, des médias majeurs et des parties prenantes.</p>
+                <ul class="deliverables-list">
+                    <li data-i18n="s1_d1">Stratégie d'image exécutive pour dirigeants et Ultra High Net Worth Individuals</li>
+                    <li data-i18n="s1_d2">Relations médias sélectives à haute valeur stratégique</li>
+                    <li data-i18n="s1_d3">Accompagnement réputationnel lors d'opérations M&A ou d'IPO</li>
+                </ul>
             </div>
-            <div data-i18n="fr">
-              <div class="tag"><span class="dot"></span> Briefing</div>
-              <h3>Signaux trimestriels de risque politique</h3>
-              <p>Indicateurs précoces et implications pour les dossiers actifs.</p>
-              <a class="inline" href="#contact">Demander la version à jour →</a>
-            </div>
-          </article>
 
-          <article class="note">
-            <div class="active" data-i18n="en">
-              <div class="tag"><span class="dot"></span> Note</div>
-              <h3>Stakeholder mapping template</h3>
-              <p>A practical model to map influence and sequence engagement.</p>
-              <a class="inline" href="#services">Related services →</a>
+            <!-- Service 2 -->
+            <div class="service-card">
+                <div class="card-num">02 / GESTION DE CRISE</div>
+                <h3 data-i18n="s2_h">Gestion d'Enjeux & Riposte 72 Heures</h3>
+                <p data-i18n="s2_p">Quand la surveillance monte, vous avez besoin d'une architecture de réponse immédiate pour neutraliser la déstabilisation et contenir le risque.</p>
+                <ul class="deliverables-list">
+                    <li data-i18n="s2_d1">Playbook de réponse d'urgence sous 72 h (rôles, approbations, cadence)</li>
+                    <li data-i18n="s2_d2">Protection active contre la désinformation et campagnes ciblées</li>
+                    <li data-i18n="s2_d3">Briefings d'urgence : quoi dire, quoi éviter, actions immédiates</li>
+                </ul>
             </div>
-            <div data-i18n="fr">
-              <div class="tag"><span class="dot"></span> Note</div>
-              <h3>Gabarit de cartographie des acteurs</h3>
-              <p>Modèle concret pour cartographier l’influence et séquencer l’engagement.</p>
-              <a class="inline" href="#services">Services liés →</a>
-            </div>
-          </article>
 
-          <article class="note">
-            <div class="active" data-i18n="en">
-              <div class="tag"><span class="dot"></span> Playbook</div>
-              <h3>First 72 hours under scrutiny</h3>
-              <p>Response architecture for government, stakeholders, and media.</p>
-              <a class="inline" href="#contact">Build a response plan →</a>
+            <!-- Service 3 -->
+            <div class="service-card">
+                <div class="card-num">03 / AFFAIRES PUBLIQUES & LOBBYING</div>
+                <h3 data-i18n="s3_h">Lobbying & Cartographie du Pouvoir</h3>
+                <p data-i18n="s3_p">Alignement de vos priorités commerciales avec le cadre réglementaire et législatif au Canada, au Royaume-Uni et dans le Commonwealth.</p>
+                <ul class="deliverables-list">
+                    <li data-i18n="s3_d1">Carte d'influence (acteurs clés, points de pression, chemins décisionnels)</li>
+                    <li data-i18n="s3_d2">Plan de rencontres, séquençage et représentation d'intérêts</li>
+                    <li data-i18n="s3_d3">Notes de briefing, registres de risques et arguments approuvés</li>
+                </ul>
             </div>
-            <div data-i18n="fr">
-              <div class="tag"><span class="dot"></span> Playbook</div>
-              <h3>Premières 72 heures sous surveillance</h3>
-              <p>Architecture de réponse pour le gouvernement, les parties prenantes et les médias.</p>
-              <a class="inline" href="#contact">Établir un plan de réponse →</a>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <div class="card-num">04 / PRIVATE WEALTH & FAMILY OFFICES</div>
+                <h3 data-i18n="s4_h">Services aux Family Offices & Holdings</h3>
+                <p data-i18n="s4_p">Ingénierie réputationnelle sur mesure et protection d'actifs immatériels pour structures familiales et investisseurs privés d'envergure.</p>
+                <ul class="deliverables-list">
+                    <li data-i18n="s4_d1">Protection discrète du patrimoine réputationnel et de la vie privée</li>
+                    <li data-i18n="s4_d2">Accompagnement lors de litiges publics, successoraux ou de gouvernance</li>
+                    <li data-i18n="s4_d3">Positionnement transfrontalier adapté aux cadres multi-juridictionnels</li>
+                </ul>
             </div>
-          </article>
         </div>
-      </div>
     </section>
 
-    
-    
-<!-- CONFIDENTIALITY -->
-<section id="confidentiality">
-  <div class="wrap">
-    <div class="sectionhead">
-      <div class="stack">
-        <h2>Confidentiality</h2>
-        <p class="sub">
-          Some mandates are visible. Others must remain invisible.
-        </p>
-      </div>
-    </div>
-
-    <p class="sub">
-      Indice Public operates under strict confidentiality standards. No public portfolio. Discretion is part of the service.
-    </p>
-  </div>
-</section>
-
-
-<!-- CONTACT -->
-    <section id="contact">
-      <div class="wrap">
-        <div class="sectionhead">
-          <div class="stack">
-            <h2 data-t="h_contact">Contact</h2>
-            <p class="sub" data-t="contact_sub">
-              Confidential intake for mandates in public affairs, lobbying, and political risk.
-            </p>
-          </div>
+    <!-- Method Section -->
+    <section class="section" id="method">
+        <div class="section-header">
+            <span class="section-tag" data-i18n="m_tag">Méthodologie</span>
+            <h2 class="section-title" data-i18n="m_title">Un processus rigoureux : définir la décision, construire le levier, exécuter avec discipline.</h2>
         </div>
 
-        <div class="contact">
-          <!-- LEFT: HubSpot form -->
-          <div class="card">
-            <div class="panel">
-              <script src="https://js-na3.hsforms.net/forms/embed/342880637.js" defer></script>
-
-              <!-- EN -->
-              <div class="active" data-i18n="en">
-                <div class="hs-form-frame" data-region="na3" data-form-id="5aa38ef4-3045-4fb2-a1ab-e4be596658a6" data-portal-id="342880637"></div>
-                <p class="fine">Confidential by default. Client names are not published without written authorization.</p>
-              </div>
-
-              <!-- FR -->
-              <div data-i18n="fr">
-                <div class="hs-form-frame" data-region="na3" data-form-id="5aa38ef4-3045-4fb2-a1ab-e4be596658a6" data-portal-id="342880637"></div>
-                <p class="fine">Confidentiel par défaut. Aucun nom de client n’est publié sans autorisation écrite.</p>
-              </div>
+        <div class="method-steps">
+            <div class="step-box">
+                <div class="step-num">01</div>
+                <h4 data-i18n="st1_h">Analyse</h4>
+                <p data-i18n="st1_p">Clarifier la décision visée, identifier les contraintes réglementaires et cartographier les acteurs capables d'infléchir l'issue.</p>
             </div>
-          </div>
-
-          <!-- RIGHT: Operating principles -->
-          <div class="card">
-            <div class="panel">
-              <!-- EN -->
-              <div class="active" data-i18n="en">
-                <h3>Operating principles</h3>
-                <p>Work product designed for decision-makers: concise, defensible, and actionable.</p>
-                <div class="kpi">
-                  <div><strong>Typical cadence:</strong> 24–48h for an initial memo and recommended path.</div>
-                  <div><strong>Engagement models:</strong> retainer (ongoing) or project (defined scope).</div>
-                  <div><strong>Coverage:</strong> Canada-wide, with QC + ON + Federal depth.</div>
-                </div>
-                <div class="contact-actions" style="margin-top:16px">
-                  <a class="btn primary" href="#contact" data-t="cta_conf">Request a confidential briefing</a>
-                  <a class="btn" href="#services" data-t="cta_view">View services</a>
-                </div>
-                <p class="fine">To expedite: include the decision date and the principal counterparties.</p>
-              </div>
-
-              <!-- FR -->
-              <div data-i18n="fr">
-                <h3>Principes de travail</h3>
-                <p>Des livrables pensés pour les décideurs: concis, défendables et actionnables.</p>
-                <div class="kpi">
-                  <div><strong>Cadence typique:</strong> 24–48 h pour un premier mémo et une trajectoire recommandée.</div>
-                  <div><strong>Modes d’engagement:</strong> forfait (récurrent) ou mandat (portée définie).</div>
-                  <div><strong>Couverture:</strong> Canada, avec profondeur QC + ON + fédéral.</div>
-                </div>
-                <div class="contact-actions" style="margin-top:16px">
-                  <a class="btn primary" href="#contact" data-t="cta_conf">Demander un briefing confidentiel</a>
-                  <a class="btn" href="#services" data-t="cta_view">Voir les services</a>
-                </div>
-                <p class="fine">Pour accélérer: inclure la date de décision et les principales contreparties.</p>
-              </div>
+            <div class="step-box">
+                <div class="step-num">02</div>
+                <h4 data-i18n="st2_h">Stratégie</h4>
+                <p data-i18n="st2_p">Séquencer les interventions, formaliser les messages clés et fixer un plan d'action mesurable et défendable.</p>
             </div>
-          </div>
+            <div class="step-box">
+                <div class="step-num">03</div>
+                <h4 data-i18n="st3_h">Exécution</h4>
+                <p data-i18n="st3_p">Suivre les signaux en temps réel, ajuster la posture et livrer des briefings opérationnels prêts pour la décision.</p>
+            </div>
         </div>
-      </div>
     </section>
-</main>
 
-  <footer>
-    <div class="wrap">
-      <div class="footergrid">
-        <div>© <span id="y"></span> Indice Public</div>
-        <div>
-          <span data-i18n="en" class="active">Public affairs • lobbying • strategic advisory</span>
-          <span data-i18n="fr">Affaires publiques • lobbying • conseil stratégique</span>
+    <!-- Confidentiality Section -->
+    <section class="section" id="confidentiality">
+        <div class="confidential-box">
+            <h3 data-i18n="conf_title">Engagements & Discrétion Absolue</h3>
+            <p data-i18n="conf_desc">
+                Certains mandats sont publics. D'autres doivent rester invisibles. Indice Public opère sous des normes de confidentialité strictes. Nous ne publions aucun portefeuille client sans autorisation préalable écrite. La discrétion fait partie intégrante du livrable.
+            </p>
         </div>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    const elEn = document.getElementById('btn-en');
-    const elFr = document.getElementById('btn-fr');
-    const blocks = Array.from(document.querySelectorAll('[data-i18n]'));
+    <!-- Contact Form (Redirection vers executive@aresopsec.com via Formspree sans exposition) -->
+    <section class="section" id="contact">
+        <div class="contact-wrapper">
+            <div class="section-header" style="margin-bottom: 2rem; text-align: center;">
+                <span class="section-tag" data-i18n="c_tag">Prise de contact</span>
+                <h2 class="section-title" style="font-size: 1.8rem;" data-i18n="c_title">Demander un briefing confidentiel</h2>
+                <p class="section-subtitle" style="font-size: 0.95rem;" data-i18n="c_sub">Transmission directe sous pli restreint vers la direction d'Indice Public.</p>
+            </div>
 
-    const t = {
-      en: {
-        nav_services:"Services",
-        nav_approach:"Method",
-        nav_insights:"Briefings",
-        nav_contact:"Contact",
-        cta_brief:"Request a briefing",
-        cta_engage:"Engage",
-        cta_conf:"Request a confidential briefing",
-        cta_view:"View services",
-        cta_read:"Access briefings",
-        h_services:"Services",
-        services_sub:"Clear deliverables, tight timelines, and disciplined execution — built for decision-makers and internal teams.",
-        h_approach:"Method",
-        approach_sub:"A tight process: define the decision, build leverage, execute with discipline.",
-        h_insights:"Briefings",
-        insights_sub:"Examples only. Client work is confidential.",
-        h_contact:"Contact",
-        contact_sub:"Confidential intake for mandates in public affairs, lobbying, and political risk."
-      },
-      fr: {
-        nav_services:"Services",
-        nav_approach:"Méthode",
-        nav_insights:"Briefings",
-        nav_contact:"Contact",
-        cta_brief:"Briefing",
-        cta_engage:"Mandater",
-        cta_conf:"Demander un briefing confidentiel",
-        cta_view:"Voir les services",
-        cta_read:"Accéder aux briefings",
-        h_services:"Services",
-        services_sub:"Livrables clairs, échéanciers serrés, exécution disciplinée — pensé pour les décideurs, les payeurs et les équipes internes.",
-        h_approach:"Méthode",
-        approach_sub:"Process serré: clarifier la décision, bâtir le levier, exécuter avec discipline.",
-        h_insights:"Briefings",
-        insights_sub:"Exemples uniquement. Le travail client demeure confidentiel.",
-        h_contact:"Contact",
-        contact_sub:"Prise de contact confidentielle pour des mandats en affaires publiques, lobbying et risque politique."
-      }
-    };
+            <form action="https://formspree.io/f/executive@aresopsec.com" method="POST">
+                <div class="form-group">
+                    <label data-i18n="f_lbl_name">Nom &amp; Organisation</label>
+                    <input type="text" name="name" class="form-control" required placeholder="Ex: Direction Générale / Family Office">
+                </div>
 
-    function setLang(lang){
-      blocks.forEach(b => b.classList.toggle('active', b.getAttribute('data-i18n') === lang));
-      elEn.setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
-      elFr.setAttribute('aria-pressed', lang === 'fr' ? 'true' : 'false');
+                <div class="form-group">
+                    <label data-i18n="f_lbl_contact">Coordonnées de retour (Courriel / Téléphone sécurisé)</label>
+                    <input type="text" name="contact" class="form-control" required placeholder="Ex: nom@organisation.com">
+                </div>
 
-      document.querySelectorAll('[data-t]').forEach(node=>{
-        const key = node.getAttribute('data-t');
-        if(t[lang] && t[lang][key]) node.textContent = t[lang][key];
-      });
+                <div class="form-group">
+                    <label data-i18n="f_lbl_msg">Contexte de la décision, calendrier ou urgence</label>
+                    <textarea name="message" class="form-control" required placeholder="Description sommaire du mandat..."></textarea>
+                </div>
 
-      document.documentElement.lang = lang;
-      localStorage.setItem('ip_lang', lang);
-    }
+                <button type="submit" class="btn-primary" style="width: 100%; text-align: center;" data-i18n="f_btn">Transmettre la demande</button>
+            </form>
+        </div>
+    </section>
 
-    elEn.addEventListener('click', ()=>setLang('en'));
-    elFr.addEventListener('click', ()=>setLang('fr'));
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Indice Public Ltd. &bull; Londres (UK) &bull; Canada. <span data-i18n="ft_rights">Tous droits réservés.</span></p>
+        <p style="font-family: var(--font-mono); font-size: 0.75rem;" data-i18n="ft_sub">Affaires publiques • Lobbying • Conseil stratégique</p>
+    </footer>
 
-    const saved = localStorage.getItem('ip_lang');
-    setLang(saved === 'fr' ? 'fr' : 'en');
+    <!-- Multilingual Script (FR / EN / ES) -->
+    <script>
+        const translations = {
+            fr: {
+                nav_services: "Services", nav_method: "Méthode", nav_confidentiality: "Confidentialité", nav_contact: "Contact",
+                hero_tag: "Consultation en Affaires Publiques & Stratégie d'Influence",
+                hero_title: "Risque politique. Décisions gouvernementales. Réputation sous contrôle.",
+                hero_lead: "Consultation discrète destinée aux équipes de direction, Family Offices et investisseurs confrontés à des enjeux gouvernementaux, réglementaires et réputationnels au Canada, au Royaume-Uni et dans les juridictions alignées.",
+                hero_btn_1: "Demander un briefing confidentiel", hero_btn_2: "Explorer nos expertises",
+                m_scope_lbl: "Portée", m_scope_val: "Enjeux publics & gouvernementaux",
+                m_cov_lbl: "Bureaux & Couverture", m_cov_val: "Canada (QC, ON, Fédéral) & Royaume-Uni",
+                m_resp_lbl: "Première réponse", m_resp_val: "24–48 h (Cellule d'urgence)",
+                m_mode_lbl: "Modes d'engagement", m_mode_val: "Mandat spécifique / Accompagnement récurrent",
+                s_tag: "Périmètre d'intervention", s_title: "Des livrables clairs, des échéanciers resserrés et une exécution disciplinée.",
+                s_sub: "Nous aidons les décideurs à anticiper les virages réglementaires, gérer les attaques réputationnelles et construire des leviers d'action solides.",
+                s1_h: "Positionnement Exécutif & Shield-Réputation",
+                s1_p: "Maîtrise de l'image de marque et valorisation du leadership exécutif auprès des cercles décisionnels, des médias majeurs et des parties prenantes.",
+                s1_d1: "Stratégie d'image exécutive pour dirigeants et Ultra High Net Worth Individuals", s1_d2: "Relations médias sélectives à haute valeur stratégique", s1_d3: "Accompagnement réputationnel lors d'opérations M&A ou d'IPO",
+                s2_h: "Gestion d'Enjeux & Riposte 72 Heures",
+                s2_p: "Quand la surveillance monte, vous avez besoin d'une architecture de réponse immédiate pour neutraliser la déstabilisation et contenir le risque.",
+                s2_d1: "Playbook de réponse d'urgence sous 72 h (rôles, approbations, cadence)", s2_d2: "Protection active contre la désinformation et campagnes ciblées", s2_d3: "Briefings d'urgence : quoi dire, quoi éviter, actions immédiates",
+                s3_h: "Lobbying & Cartographie du Pouvoir",
+                s3_p: "Alignement de vos priorités commerciales avec le cadre réglementaire et législatif au Canada, au Royaume-Uni et dans le Commonwealth.",
+                s3_d1: "Carte d'influence (acteurs clés, points de pression, chemins décisionnels)", s3_d2: "Plan de rencontres, séquençage et représentation d'intérêts", s3_d3: "Notes de briefing, registres de risques et arguments approuvés",
+                s4_h: "Services aux Family Offices & Holdings",
+                s4_p: "Ingénierie réputationnelle sur mesure et protection d'actifs immatériels pour structures familiales et investisseurs privés d'envergure.",
+                s4_d1: "Protection discrète du patrimoine réputationnel et de la vie privée", s4_d2: "Accompagnement lors de litiges publics, successoraux ou de gouvernance", s4_d3: "Positionnement transfrontalier adapté aux cadres multi-juridictionnels",
+                m_tag: "Méthodologie", m_title: "Un processus rigoureux : définir la décision, construire le levier, exécuter avec discipline.",
+                st1_h: "Analyse", st1_p: "Clarifier la décision visée, identifier les contraintes réglementaires et cartographier les acteurs capables d'infléchir l'issue.",
+                st2_h: "Stratégie", st2_p: "Séquencer les interventions, formaliser les messages clés et fixer un plan d'action mesurable et défendable.",
+                st3_h: "Exécution", st3_p: "Suivre les signaux en temps réel, ajuster la posture et livrer des briefings opérationnels prêts pour la décision.",
+                conf_title: "Engagements & Discrétion Absolue", conf_desc: "Certains mandats sont publics. D'autres doivent rester invisibles. Indice Public opère sous des normes de confidentialité strictes. Nous ne publions aucun portefeuille client sans autorisation préalable écrite. La discrétion fait partie intégrante du livrable.",
+                c_tag: "Prise de contact", c_title: "Demander un briefing confidentiel", c_sub: "Transmission directe sous pli restreint vers la direction d'Indice Public.",
+                f_lbl_name: "Nom & Organisation", f_lbl_contact: "Coordonnées de retour (Courriel / Téléphone sécurisé)", f_lbl_msg: "Contexte de la décision, calendrier ou urgence", f_btn: "Transmettre la demande",
+                ft_rights: "Tous droits réservés.", ft_sub: "Affaires publiques • Lobbying • Conseil stratégique"
+            },
+            en: {
+                nav_services: "Services", nav_method: "Method", nav_confidentiality: "Confidentiality", nav_contact: "Contact",
+                hero_tag: "Public Affairs & Influence Strategy Advisory",
+                hero_title: "Political risk. Government decisions. Reputation under control.",
+                hero_lead: "Discreet advisory for leadership teams, Family Offices, and investors navigating complex government, regulatory, and reputational exposure across Canada, the UK, and aligned jurisdictions.",
+                hero_btn_1: "Request a confidential briefing", hero_btn_2: "Explore our expertise",
+                m_scope_lbl: "Scope", m_scope_val: "Public & Government Exposure",
+                m_cov_lbl: "Offices & Coverage", m_cov_val: "Canada (QC, ON, Federal) & United Kingdom",
+                m_resp_lbl: "First response", m_resp_val: "24–48h (Emergency Cell)",
+                m_mode_lbl: "Engagement models", m_mode_val: "Project Mandate / Strategic Retainer",
+                s_tag: "Scope of Work", s_title: "Clear deliverables, tight timelines, and disciplined execution.",
+                s_sub: "We help decision-makers anticipate regulatory shifts, handle reputational scrutiny, and build defensible leverage.",
+                s1_h: "Executive Positioning & Reputation Shield",
+                s1_p: "Strategic positioning and public image control for C-level executives, high-profile families, and global stakeholders.",
+                s1_d1: "Executive image strategy for leaders and Ultra High Net Worth Individuals", s1_d2: "Selective, high-value international media relations", s1_d3: "Reputational support during M&A or IPO transactions",
+                s2_h: "Issues Management & 72-Hour Response",
+                s2_p: "When scrutiny rises, you need an immediate response architecture to neutralize destabilization and contain exposure.",
+                s2_d1: "72-hour emergency response playbook (roles, approvals, cadence)", s2_d2: "Active defense against targeted disinformation campaigns", s2_d3: "High-pressure executive briefings: what to say, avoid, and do next",
+                s3_h: "Lobbying & Power Mapping",
+                s3_p: "Aligning business objectives with regulatory and legislative frameworks in Canada, the United Kingdom, and Commonwealth jurisdictions.",
+                s3_d1: "Influence mapping (key actors, pressure points, decision paths)", s3_d2: "Engagement sequence, meeting plans, and interest representation", s3_d3: "Decision memos, risk registers, and approved talking points",
+                s4_h: "Services for Family Offices & Holdings",
+                s4_p: "Tailored reputational engineering and intangible asset protection for private wealth structures and global investors.",
+                s4_d1: "Discreet protection of family wealth reputation and privacy", s4_d2: "Advisory during public disputes, succession, or governance friction", s4_d3: "Cross-border positioning adapted to multi-jurisdictional frameworks",
+                m_tag: "Methodology", m_title: "A disciplined process: define the decision, build leverage, execute with precision.",
+                st1_h: "Assessment", st1_p: "Define the decision, constraints, and key stakeholders capable of altering the outcome.",
+                st2_h: "Strategy", st2_p: "Sequence interventions, formalize narrative architecture, and set measurable milestones.",
+                st3_h: "Execution", st3_p: "Track signals in real-time, adjust posture, and deliver decision-ready briefings.",
+                conf_title: "Commitment to Confidentiality", conf_desc: "Some mandates are visible. Others must remain invisible. Indice Public operates under strict confidentiality standards. No public client list. Discretion is part of the service.",
+                c_tag: "Intake", c_title: "Request a confidential briefing", c_sub: "Direct intake transmitted under secure protocols to Indice Public leadership.",
+                f_lbl_name: "Name & Organization", f_lbl_contact: "Contact details (Email / Secure Phone)", f_lbl_msg: "Decision context, timeline, or emergency overview", f_btn: "Submit request",
+                ft_rights: "All rights reserved.", ft_sub: "Public affairs • Lobbying • Strategic advisory"
+            },
+            es: {
+                nav_services: "Servicios", nav_method: "Método", nav_confidentiality: "Confidencialidad", nav_contact: "Contacto",
+                hero_tag: "Asesoría en Asuntos Públicos y Estrategia de Influencia",
+                hero_title: "Riesgo político. Decisiones gubernamentales. Reputación bajo control.",
+                hero_lead: "Consulta discreta diseñada para equipos directivos, Family Offices e inversionistas que enfrentan retos gubernamentales, regulatorios y reputacionales en Canadá, el Reino Unido y jurisdicciones aliadas.",
+                hero_btn_1: "Solicitar un briefing confidencial", hero_btn_2: "Explorar especialidades",
+                m_scope_lbl: "Alcance", m_scope_val: "Riesgo Público y Gubernamental",
+                m_cov_lbl: "Oficinas y Cobertura", m_cov_val: "Canadá (QC, ON, Federal) y Reino Unido",
+                m_resp_lbl: "Primera respuesta", m_resp_val: "24–48 h (Célula de emergencia)",
+                m_mode_lbl: "Modalidad", m_mode_val: "Mandato específico / Asesoría continua",
+                s_tag: "Áreas de Intervención", s_title: "Entregables claros, plazos ajustados y ejecución disciplinada.",
+                s_sub: "Ayudamos a los ejecutivos a anticipar cambios regulatorios, gestionar ataques reputacionales y construir palancas de acción sólidas.",
+                s1_h: "Posicionamiento Ejecutivo y Protección de Reputación",
+                s1_p: "Dominio de imagen pública y fortalecimiento de liderazgo ante círculos de decisión, grandes medios y partes interesadas.",
+                s1_d1: "Estrategia de imagen para ejecutivos e individuos de alto patrimonio", s1_d2: "Relaciones de prensa internacionales de alto valor estratégico", s1_d3: "Soporte reputacional en operaciones de Fusiones y Adquisiciones (M&A) o IPO",
+                s2_h: "Gestión de Crisis y Respuesta en 72 Horas",
+                s2_p: "Cuando la exposición aumenta, se requiere una arquitectura de respuesta inmediata para contener la desestabilización.",
+                s2_d1: "Playbook de respuesta de emergencia en 72h (roles, aprobaciones, ritmo)", s2_d2: "Defensa activa contra campañas dirigidas de desinformación", s2_d3: "Briefings ejecutivos bajo alta presión: qué decir, qué evitar y siguientes pasos",
+                s3_h: "Lobbying y Mapeo del Poder",
+                s3_p: "Alineación de objetivos comerciales con los marcos regulatorios y legislativos en Canadá, Reino Unido y el Commonwealth.",
+                s3_d1: "Mapa de influencia (actores clave, puntos de presión y rutas de decisión)", s3_d2: "Secuencia de reuniones, estrategia de interacción y representación de intereses", s3_d3: "Notas de briefing, registros de riesgo y argumentos aprobados",
+                s4_h: "Servicios para Family Offices y Holdings",
+                s4_p: "Ingeniería reputacional a la medida y protección de activos intangibles para estructuras familiares e inversionistas globales.",
+                s4_d1: "Protección discreta de la reputación patrimonial y privacidad", s4_d2: "Asesoría en disputas públicas, sucesorias o de gobernanza", s4_d3: "Posicionamiento transfronterizo adaptado a entornos multijurisdiccionales",
+                m_tag: "Metodología", m_title: "Un proceso riguroso: definir la decisión, construir la palanca, ejecutar con disciplina.",
+                st1_h: "Análisis", st1_p: "Aclarar la decisión, identificar restricciones regulatorias y mapear a los actores decisivos.",
+                st2_h: "Estrategia", st2_p: "Secuenciar intervenciones, definir la arquitectura narrativa y fijar objetivos medibles.",
+                st3_h: "Ejecución", st3_p: "Monitorear señales en tiempo real, ajustar postura y entregar briefings listos para la toma de decisión.",
+                conf_title: "Compromiso de Confidencialidad", conf_desc: "Algunos mandatos son públicos. Otros deben permanecer invisibles. Indice Public opera bajo estrictos estándares de confidencialidad. No publicamos listas de clientes sin autorización previa por escrito. La discreción forma parte del entregable.",
+                c_tag: "Contacto", c_title: "Solicitar un briefing confidencial", c_sub: "Envío directo bajo protocolo seguro a la dirección directiva de Indice Public.",
+                f_lbl_name: "Nombre y Organización", f_lbl_contact: "Detalles de contacto (Correo / Teléfono seguro)", f_lbl_msg: "Contexto de la decisión, plazo o emergencia", f_btn: "Enviar solicitud",
+                ft_rights: "Todos los derechos reservados.", ft_sub: "Asuntos públicos • Lobbying • Asesoría estratégica"
+            }
+        };
 
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
+    </script>
 </body>
 </html>
