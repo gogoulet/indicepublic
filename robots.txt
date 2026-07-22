@@ -1,0 +1,22 @@
+# Robots.txt pour Indice Public
+User-agent: *
+Allow: /
+
+# Autorisation explicite des crawlers IA pour le référencement GEO
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Indication du Sitemap
+Sitemap: https://indicepublic.com/sitemap.xml
